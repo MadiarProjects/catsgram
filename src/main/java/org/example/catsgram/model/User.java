@@ -4,17 +4,15 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class User {
-    private String email;
+    private final String email;
     private String nickname;
     private LocalDate birthdate;
-
+    User(String email){
+        this.email=email;
+    }
 
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getNickname() {

@@ -1,6 +1,5 @@
 package org.example.catsgram;
 
-import org.example.catsgram.model.MyCar;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

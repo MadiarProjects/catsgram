@@ -1,44 +1,39 @@
 package org.example.catsgram.controller;
 
-import org.example.catsgram.exception.InvalidEmailException;
-import org.example.catsgram.exception.UserAlreadyExistException;
+import lombok.RequiredArgsConstructor;
+
+import org.example.catsgram.exception.InvalidParam;
 import org.example.catsgram.model.User;
+import org.example.catsgram.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    private final Set<User> users = new HashSet<>();
+    private final UserService userService;
+
     @GetMapping
     public Set<User> getUsers() {
-        return users;
+        return userService.getAllUsers();
+    }
+    @GetMapping("/{userEmail}")
+    public User getByEmail (@PathVariable String userEmail){
+        return userService.getByEmil(userEmail);
     }
     @PostMapping
     public User addUser(@RequestBody User user) {
-        validateEmail(user.getEmail());
-        if (users.contains(user)) {
-            throw new UserAlreadyExistException("Пользователь уже существует: " + user.getEmail());
-        }
-        users.add(user);
-        return user;
-    }
-    @PutMapping
-    public User updateOrCreateUser(@RequestBody User user) {
-        validateEmail(user.getEmail());
-        users.remove(user);
-        users.add(user);
-        return user;
+        return userService.createUser(user);
     }
 
-    private void validateEmail(String email) {
-        if (email == null || email.isBlank()) {
-            throw new InvalidEmailException("Email не может быть пустым");
-        }
+    @PutMapping
+    public User updateOrCreateUser(@RequestBody User user) {
+        return userService.updateOrCreateUser(user);
     }
+
 }
 
 
