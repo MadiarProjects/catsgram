@@ -19,6 +19,7 @@ import java.time.Instant;
 
 
 public class Post {
+    private final int id;
     @ToString.Exclude//автор не попадет
     final String author; // автор
     final Instant creationDate = Instant.now(); // дата создания
