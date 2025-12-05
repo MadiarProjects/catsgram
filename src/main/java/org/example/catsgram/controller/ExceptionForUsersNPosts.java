@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice(basePackageClasses = {UserService.class,PostService.class})
+@RestControllerAdvice
 public class ExceptionForUsersNPosts  {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
